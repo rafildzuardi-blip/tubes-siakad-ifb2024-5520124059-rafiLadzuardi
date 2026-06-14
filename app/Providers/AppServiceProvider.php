@@ -3,29 +3,20 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\URL; // Tambahkan baris ini jika belum ada
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
-        Gate::define('admin', function ($user) {
-            return $user->role === 'admin';
-        });
-
-        Gate::define('mahasiswa', function ($user) {
-            return $user->role === 'mahasiswa';
-        });
+        // Paksa semua URL dan Form menggunakan HTTPS jika di-deploy di Railway
+        if (config('app.env') === 'production' || env('REDIRECT_HTTPS', true)) {
+            URL::forceScheme('https');
+        }
     }
 }
