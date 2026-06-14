@@ -1,59 +1,84 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Tugas Besar SIAKAD - IFB2024 - 5520124059 - Rafi ladzuardi
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+##  Link Aplikasi (Sudah Online)
+Proyek ini sudah sukses di-hosting dan bisa langsung kamu akses secara publik lewat link di bawah ini:
+ **[SIAKAD Online - Railway](https://tubes-siakad-ifb2024-5520124059-rafiladzuardi-production.up.railway.app/)**
 
-## About Laravel
+>  **Udah Nyaman di HP:** Semua halaman di dalam aplikasi ini sudah diperbaiki layout-nya. Tampilan dijamin aman, rapi, responsif, dan tidak meluber kalau dibuka lewat browser handphone.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+##  Akun untuk Coba Login (Demo Accounts)
+Biar tidak ribet buat akun baru saat memeriksa, silakan pakai akun uji coba di bawah ini untuk melihat fitur masing-masing role:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+###  1. Akun Admin / Dosen
+* **Email:** `admin@gmail.com`
+* **Password:** `admin123`
 
-## Learning Laravel
+###  2. Akun Mahasiswa
+* **Email:** `rafiladzuardi@gmail.com`
+* **Password:** `12345678`
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+##  A. Tentang Aplikasi Ini
+**SIAKAD (Sistem Informasi Akademik)** ini adalah sebuah platform web yang dibuat khusus untuk mempermudah urusan data perkuliahan di kampus. Mulai dari mengelola data dasar (dosen, mahasiswa, mata kuliah), mengatur jadwal belajar-mengajar harian, sampai ke proses mahasiswa mengambil mata kuliah pilihannya (KRS) secara online, semuanya sudah terintegrasi dengan rapi di sini.
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+##  B. Menu & Kegunaan Tiap Halaman
 
-### Premium Partners
+1. **Halaman Utama (Landing Page)**
+   Tempat awal saat pertama kali membuka web. Isinya info sekilas tentang kampus dan ada tombol khusus untuk mengarahkan pengguna ke halaman login.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+2. **Halaman Dashboard**
+   Halaman penyambut setelah sukses login. Di sini pengguna bisa melihat rangkuman singkat atau statistik jumlah data yang ada di dalam sistem.
 
-## Contributing
+3. **Halaman Data Dosen**
+   Khusus admin untuk mengelola data dosen pengajar. Di sini bisa melihat daftar dosen, menambah dosen baru, mengubah info, atau menghapus data berdasarkan NIDN.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. **Halaman Data Mahasiswa**
+   Tempat admin mengelola data mahasiswa yang aktif. Fungsinya untuk melihat daftar, menambah mahasiswa baru, mengedit biodata, atau menghapus data lewat NPM.
 
-## Code of Conduct
+5. **Halaman Data Mata Kuliah**
+   Menu buat mengelola daftar mata kuliah yang disediakan kampus, lengkap dengan pengaturan bobot SKS dan kode mata kuliahnya.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+6. **Halaman Data Jadwal**
+   Dipakai admin untuk meracik jadwal kuliah. Di halaman ini kita mencocokkan mata kuliah, dosen yang mengajar, kelasnya, serta hari dan jamnya.
 
-## Security Vulnerabilities
+7. **Halaman Kartu Rencana Studi (KRS) Mahasiswa**
+   Menu penting bagi mahasiswa untuk memilih mata kuliah yang mau diambil di semester ini, menghitung otomatis total SKS yang masuk, sekaligus bisa cetak bukti KRS-nya ke format PDF.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+##  C. Dokumentasi (Screenshots)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+###  Bagian Admin
+
+#### 1. Dashboard Admin
+![Dashboard Admin](screenshots/bagian_admin/dashboard.png)
+
+#### 2. Data Dosen
+![Data Dosen](screenshots/bagian_admin/dosen.png)
+
+#### 3. Data Mahasiswa
+![Data Mahasiswa](screenshots/bagian_admin/mahasiswa.png)
+
+#### 4. Data Mata Kuliah
+![Data Mata Kuliah](screenshots/bagian_admin/matakuliah.png)
+
+#### 5. Data Jadwal
+![Data Jadwal](screenshots/bagian_admin/jadwal.png)
+
+#### 6. Monitoring KRS Mahasiswa
+![Monitoring KRS](screenshots/bagian_admin/krs.png)
+
+---
+
+###  Bagian Mahasiswa
+
+#### 1. Halaman Jadwal Kuliah
+![Jadwal Kuliah](screenshots/bagian_mahasiswa/jadwal_kuliah.png)
+
+#### 2. Kartu Rencana Studi (KRS)
+![KRS Mahasiswa](screenshots/bagian_mahasiswa/krs.png)
