@@ -3,122 +3,118 @@
 @section('title', 'Data Jadwal')
 
 @section('content_header')
-<div class="d-flex justify-content-between">
-    <h1><i class="fas fa-calendar-alt"></i> Data Jadwal</h1>
+<div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center pb-3 pb-sm-0">
+    <div class="mb-3 mb-sm-0">
+        <h1 class="mb-0 text-dark font-weight-bold" style="font-size: calc(1.5rem + 1vw);">
+            <i class="fas fa-calendar-alt text-primary"></i> 
+            Data Jadwal
+        </h1>
+        <small class="text-muted">Kelola Alokasi Waktu Perkuliahan</small>
+    </div>
 
-    <a href="{{ route('jadwal.create') }}" class="btn btn-primary">
-        <i class="fas fa-plus"></i> Tambah Jadwal
-    </a>
+    <div class="w-100 w-sm-auto">
+        <a href="{{ route('jadwal.create') }}" class="btn btn-primary shadow-sm btn-block d-sm-inline-block">
+            <i class="fas fa-plus-circle"></i> Tambah Jadwal
+        </a>
+    </div>
 </div>
 @stop
 
 @section('content')
 
 @if(session('success'))
-<div class="alert alert-success">
+<div class="alert alert-success alert-dismissible fade show shadow-sm">
     {{ session('success') }}
+    <button type="button" class="close" data-dismiss="alert">
+        <span>&times;</span>
+    </button>
 </div>
 @endif
 
-<div class="card shadow-sm border-0">
+<div class="card card-outline card-primary shadow-sm border-0">
 
-    <div class="card-header">
-        <h3 class="card-title">Daftar Jadwal Perkuliahan</h3>
+    <div class="card-header bg-white">
+        <h3 class="card-title font-weight-bold text-secondary mb-0">
+            <i class="fas fa-list-alt text-primary mr-1"></i>
+            Daftar Jadwal Perkuliahan
+        </h3>
     </div>
 
-    <div class="card-body">
+    <div class="card-body p-0 p-sm-3"> <div class="table-responsive w-full" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
 
-        <table class="table table-bordered table-hover">
+            <table class="table table-bordered table-hover mb-0" style="min-width: 800px; width: 100%;">
 
-            <thead style="background:#1E293B;color:white;">
+                <thead style="background:#1E293B; color:white;">
+                    <tr>
+                        <th class="text-center" width="60" style="border-color: #334155;">No</th>
+                        <th style="border-color: #334155;">Mata Kuliah</th>
+                        <th style="border-color: #334155;">Dosen</th>
+                        <th class="text-center" width="90" style="border-color: #334155;">Kelas</th>
+                        <th class="text-center" width="120" style="border-color: #334155;">Hari</th>
+                        <th class="text-center" width="110" style="border-color: #334155;">Jam</th>
+                        <th class="text-center" width="150" style="border-color: #334155;">Aksi</th>
+                    </tr>
+                </thead>
 
-                <tr>
-                    <th>No</th>
-                    <th>Mata Kuliah</th>
-                    <th>Dosen</th>
-                    <th>Kelas</th>
-                    <th>Hari</th>
-                    <th>Jam</th>
-                    <th width="220">Aksi</th>
-                </tr>
+                <tbody>
 
-            </thead>
+                @forelse($jadwal as $key => $j)
 
-            <tbody>
+                    <tr>
+                        <td class="text-center align-middle">{{ $key + 1 }}</td>
 
-            @forelse($jadwal as $key => $j)
+                        <td class="align-middle text-dark font-weight-bold">
+                            {{ $j->matakuliah->nama_matakuliah ?? '-' }}
+                        </td>
 
-                <tr>
+                        <td class="align-middle">
+                            {{ $j->dosen->nama ?? '-' }}
+                        </td>
 
-                    <td>{{ $key + 1 }}</td>
+                        <td class="text-center align-middle">
+                            <span class="badge badge-primary px-2 py-1">
+                                {{ $j->kelas }}
+                            </span>
+                        </td>
 
-                    <td>
-                        {{ $j->matakuliah->nama_matakuliah ?? '-' }}
-                    </td>
+                        <td class="text-center align-middle">
+                            <span class="badge bg-info px-2 py-1">
+                                {{ $j->hari }}
+                            </span>
+                        </td>
 
-                    <td>
-                        {{ $j->dosen->nama ?? '-' }}
-                    </td>
+                        <td class="text-center align-middle font-weight-bold text-secondary">
+                            <i class="far fa-clock mr-1 text-muted small"></i>{{ substr($j->jam,0,5) }}
+                        </td>
 
-                    <td>{{ $j->kelas }}</td>
+                        <td class="text-center align-middle">
+                            <div class="btn-group" role="group">
+                                <a href="{{ route('jadwal.show',$j->id) }}"
+                                   class="btn btn-outline-info btn-sm mx-1 rounded shadow-sm" title="Detail">
+                                    <i class="fas fa-eye"></i>
+                                </a>
 
-                    <td>
-                        <span class="badge bg-info">
-                            {{ $j->hari }}
-                        </span>
-                    </td>
+                                <a href="{{ route('jadwal.edit',$j->id) }}"
+                                   class="btn btn-outline-warning btn-sm mx-1 rounded shadow-sm" title="Ubah">
+                                    <i class="fas fa-edit"></i>
+                                </a>
 
-                    <td>{{ $j->jam }}</td>
+                                <form action="{{ route('jadwal.destroy',$j->id) }}"
+                                      method="POST"
+                                      style="display:inline">
+                                    @csrf
+                                    @method('DELETE')
 
-                    <td>
+                                    <button onclick="return confirm('Yakin hapus data?')"
+                                            class="btn btn-outline-danger btn-sm mx-1 rounded shadow-sm" title="Hapus">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
 
-                        <a href="{{ route('jadwal.show',$j->id) }}"
-                           class="btn btn-info btn-sm">
-                            <i class="fas fa-eye"></i>
-                        </a>
+                @empty
 
-                        <a href="{{ route('jadwal.edit',$j->id) }}"
-                           class="btn btn-warning btn-sm">
-                            <i class="fas fa-edit"></i>
-                        </a>
-
-                        <form action="{{ route('jadwal.destroy',$j->id) }}"
-                              method="POST"
-                              style="display:inline">
-
-                            @csrf
-                            @method('DELETE')
-
-                            <button
-                                onclick="return confirm('Yakin hapus data?')"
-                                class="btn btn-danger btn-sm">
-
-                                <i class="fas fa-trash"></i>
-
-                            </button>
-
-                        </form>
-
-                    </td>
-
-                </tr>
-
-            @empty
-
-                <tr>
-                    <td colspan="7" class="text-center">
-                        Belum ada data jadwal
-                    </td>
-                </tr>
-
-            @endforelse
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-</div>
-
-@stop
+                    <tr>
+                        <td colspan="7" class="text-center py-5 text-muted
