@@ -531,4 +531,36 @@ return [
     */
 
     'livewire' => false,
+
+    'custom_js' => "
+        <script>
+            $(document).ready(function() {
+                // Tangkap form logout bawaan AdminLTE secara global
+                var logoutForm = $('#logout-form');
+                
+                if (logoutForm.length) {
+                    // Cegat saat form mencoba melakukan submit ke server
+                    logoutForm.on('submit', function(e) {
+                        e.preventDefault(); // Stop proses kirim data langsung
+                        
+                        Swal.fire({
+                            title: 'Konfirmasi Keluar',
+                            text: 'Apakah Anda yakin ingin keluar dari aplikasi SIAKAD?',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Ya, Keluar!',
+                            cancelButtonText: 'Batal'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Jika klik YA, matikan pencegat lalu submit beneran
+                                logoutForm.off('submit').submit();
+                            }
+                        });
+                    });
+                }
+            });
+        </script>
+    ",
 ];
