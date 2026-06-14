@@ -3,9 +3,9 @@
 @section('title', 'KRS Mahasiswa')
 
 @section('content_header')
-<div class="d-flex justify-content-between align-items-center">
-    <div>
-        <h1 class="mb-0">
+<div class="d-flex flex-column flex-sm-row justify-content-between align-items-start align-items-sm-center justify-content-sm-between pb-3 pb-sm-0">
+    <div class="mb-3 mb-sm-0">
+        <h1 class="mb-0 text-dark font-weight-bold" style="font-size: calc(1.5rem + 1vw);">
             <i class="fas fa-graduation-cap text-primary"></i>
             Kartu Rencana Studi
         </h1>
@@ -14,15 +14,15 @@
         </small>
     </div>
 
-    <div>
+    <div class="d-flex flex-wrap w-100 w-sm-auto" style="gap: 8px;">
         <a href="{{ route('krs.print') }}"
-           class="btn btn-success shadow-sm mr-2">
+           class="btn btn-success shadow-sm flex-fill flex-sm-grow-0">
             <i class="fas fa-file-pdf"></i>
             Cetak PDF
         </a>
 
         <a href="{{ route('krs.create') }}"
-           class="btn btn-primary shadow-sm">
+           class="btn btn-primary shadow-sm flex-fill flex-sm-grow-0">
             <i class="fas fa-plus-circle"></i>
             Ambil Mata Kuliah
         </a>
@@ -33,7 +33,7 @@
 @section('content')
 
 @if(session('success'))
-<div class="alert alert-success alert-dismissible fade show">
+<div class="alert alert-success alert-dismissible fade show shadow-sm">
     {{ session('success') }}
     <button type="button" class="close" data-dismiss="alert">
         <span>&times;</span>
@@ -44,113 +44,89 @@
 <div class="card shadow-sm border-0">
 
     <div class="card-header bg-white">
-        <h5 class="mb-0 font-weight-bold">
+        <h5 class="mb-0 font-weight-bold text-secondary">
             <i class="fas fa-book-open text-primary"></i>
             Data Pengambilan Mata Kuliah
         </h5>
     </div>
 
-    <div class="card-body">
+    <div class="card-body p-0 p-sm-3"> <div class="table-responsive w-full" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
 
-        <div class="table-responsive">
+            <table class="table table-hover mb-0" style="min-width: 800px; width: 100%;">
 
-            <table class="table table-hover">
-
-                <thead style="background:#1E293B;color:white;">
-
+                <thead style="background:#1E293B; color:white;">
                     <tr>
-                        <th>No</th>
-                        <th>NPM</th>
-                        <th>Mahasiswa</th>
-                        <th>Kode MK</th>
-                        <th>Mata Kuliah</th>
-                        <th>SKS</th>
-                        <th width="170">Aksi</th>
+                        <th class="border-0 text-center" width="60">No</th>
+                        <th class="border-0">NPM</th>
+                        <th class="border-0">Mahasiswa</th>
+                        <th class="border-0">Kode MK</th>
+                        <th class="border-0">Mata Kuliah</th>
+                        <th class="border-0 text-center">SKS</th>
+                        <th class="border-0 text-center" width="170">Aksi</th>
                     </tr>
-
                 </thead>
 
                 <tbody>
 
                 @forelse($krs as $key => $k)
-
                     <tr>
+                        <td class="text-center align-middle">{{ $key + 1 }}</td>
 
-                        <td>{{ $key + 1 }}</td>
-
-                        <td>
-                            <span class="badge badge-primary">
+                        <td class="align-middle">
+                            <span class="badge badge-primary px-2 py-1">
                                 {{ $k->npm }}
                             </span>
                         </td>
 
-                        <td>
+                        <td class="align-middle font-weight-bold text-dark">
                             {{ $k->mahasiswa->nama ?? '-' }}
                         </td>
 
-                        <td>
-                            {{ $k->kode_matakuliah }}
-                        </td>
+                        <td class="align-middle">{{ $k->kode_matakuliah }}</td>
 
-                        <td>
+                        <td class="align-middle text-wrap" style="max-width: 200px;">
                             {{ $k->matakuliah->nama_matakuliah ?? '-' }}
                         </td>
 
-                        <td>
-                            <span class="badge badge-success">
+                        <td class="text-center align-middle">
+                            <span class="badge badge-success px-2 py-1">
                                 {{ $k->matakuliah->sks ?? 0 }} SKS
                             </span>
                         </td>
 
-                        <td>
+                        <td class="text-center align-middle">
+                            <div class="btn-group" role="group">
+                                <a href="{{ route('krs.show',$k->id) }}"
+                                   class="btn btn-outline-primary btn-sm mx-1 rounded shadow-sm" title="Detail">
+                                    <i class="fas fa-eye"></i>
+                                </a>
 
-                            <a href="{{ route('krs.show',$k->id) }}"
-                               class="btn btn-outline-primary btn-sm">
+                                <a href="{{ route('krs.edit',$k->id) }}"
+                                   class="btn btn-outline-secondary btn-sm mx-1 rounded shadow-sm" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                </a>
 
-                                <i class="fas fa-eye"></i>
-
-                            </a>
-
-                            <a href="{{ route('krs.edit',$k->id) }}"
-                               class="btn btn-outline-secondary btn-sm">
-
-                                <i class="fas fa-edit"></i>
-
-                            </a>
-
-                            <form action="{{ route('krs.destroy',$k->id) }}"
-                                  method="POST"
-                                  style="display:inline">
-
-                                @csrf
-                                @method('DELETE')
-
-                                <button
-                                    onclick="return confirm('Yakin hapus KRS?')"
-                                    class="btn btn-outline-danger btn-sm">
-
-                                    <i class="fas fa-trash"></i>
-
-                                </button>
-
-                            </form>
-
+                                <form action="{{ route('krs.destroy',$k->id) }}"
+                                      method="POST"
+                                      style="display:inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button onclick="return confirm('Yakin hapus KRS?')"
+                                            class="btn btn-outline-danger btn-sm mx-1 rounded shadow-sm" title="Hapus">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </form>
+                            </div>
                         </td>
-
                     </tr>
-
                 @empty
-
                     <tr>
-                        <td colspan="7" class="text-center py-4">
-
-                            <i class="fas fa-info-circle text-muted"></i>
+                        <td colspan="7" class="text-center py-5 text-muted">
+                            <i class="fas fa-info-circle fa-2x mb-3 text-gray"></i>
                             <br>
-                            Belum ada data KRS
-
+                            <strong>Belum ada data KRS</strong>
                         </td>
                     </tr>
-
                 @endforelse
 
                 </tbody>
@@ -163,52 +139,35 @@
 
 </div>
 
-<div class="row mt-4">
+<div class="row mt-3">
 
-    <div class="col-md-6">
-
-        <div class="card shadow-sm border-0">
-
-            <div class="card-body text-center">
-
-                <i class="fas fa-book fa-2x text-primary mb-3"></i>
-
-                <h2 class="font-weight-bold">
+    <div class="col-sm-6 mb-3 mb-sm-0">
+        <div class="card shadow-sm border-0 mb-0 h-100">
+            <div class="card-body text-center d-flex flex-column justify-content-center py-4">
+                <i class="fas fa-book fa-2x text-primary mb-2"></i>
+                <h2 class="font-weight-bold text-dark mb-1">
                     {{ $krs->count() }}
                 </h2>
-        
-                <p class="text-muted mb-0">
+                <p class="text-muted mb-0 small uppercase font-weight-bold">
                     Mata Kuliah Diambil
                 </p>
-
             </div>
-
         </div>
-
     </div>
 
-    <div class="col-md-6">
-
-        <div class="card shadow-sm border-0">
-
-            <div class="card-body text-center">
-
-                <i class="fas fa-graduation-cap fa-2x text-success mb-3"></i>
-
-                <h2 class="font-weight-bold">
+    <div class="col-sm-6">
+        <div class="card shadow-sm border-0 mb-0 h-100">
+            <div class="card-body text-center d-flex flex-column justify-content-center py-4">
+                <i class="fas fa-graduation-cap fa-2x text-success mb-2"></i>
+                <h2 class="font-weight-bold text-dark mb-1">
                     {{ $krs->sum(fn($item) => $item->matakuliah->sks ?? 0) }}
                 </h2>
-
-                <p class="text-muted mb-0">
+                <p class="text-muted mb-0 small uppercase font-weight-bold">
                     Total SKS
                 </p>
-
             </div>
-
         </div>
-
     </div>
 
 </div>
-
 @stop
