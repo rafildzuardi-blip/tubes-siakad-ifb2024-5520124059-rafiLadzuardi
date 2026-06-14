@@ -9,36 +9,28 @@ use App\Http\Controllers\KrsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+/*
+|--------------------------------------------------------------------------
+| Welcome Page (Rute Utama Aplikasi)
+|--------------------------------------------------------------------------
+*/
 Route::get('/', function () {
-    return view('welcome'); // Mengembalikan tampilan halaman welcome bawaan Laravel
+    return view('welcome'); // Halaman Welcome asli Laravel sekarang aman di sini
 });
-
 
 Route::get('/logout-user', function () {
     Auth::logout();
     return redirect('/login');
 })->name('logout.user');
 
-
 Route::get('/krs/print', [KrsController::class, 'print'])
     ->name('krs.print');
-
-/*
-|--------------------------------------------------------------------------
-| Welcome
-|--------------------------------------------------------------------------
-*/
-
-Route::get('/', function () {
-    return redirect('/login');
-});
 
 /*
 |--------------------------------------------------------------------------
 | Dashboard
 |--------------------------------------------------------------------------
 */
-
 Route::get('/dashboard', function () {
     // Menggunakan strtolower agar aman dari sensitivitas huruf besar/kecil database
     if (strtolower(auth()->user()->role) == 'admin') {
@@ -54,7 +46,6 @@ Route::get('/dashboard', function () {
 | Auth User
 |--------------------------------------------------------------------------
 */
-
 Route::middleware(['auth'])->group(function () {
 
     // Profile
@@ -69,9 +60,9 @@ Route::middleware(['auth'])->group(function () {
 
     /*
     |--------------------------------------------------------------------------
-    | ADMIN (Diubah dari role:admin menjadi can:admin)
+    | ADMIN 
     |--------------------------------------------------------------------------
-    |*/
+    */
     Route::middleware(['can:admin'])->group(function () {
 
         Route::resource('dosen', DosenController::class);
@@ -88,11 +79,10 @@ Route::middleware(['auth'])->group(function () {
 
     /*
     |--------------------------------------------------------------------------
-    | MAHASISWA (Jika nanti kamu buat Gate 'mahasiswa')
+    | MAHASISWA
     |--------------------------------------------------------------------------
-    |*/
-
-   Route::middleware(['can:mahasiswa'])->group(function () {
+    */
+    Route::middleware(['can:mahasiswa'])->group(function () {
 
         Route::resource('krs', KrsController::class);
 
