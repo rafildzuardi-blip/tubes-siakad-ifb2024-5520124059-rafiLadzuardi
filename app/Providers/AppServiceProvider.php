@@ -21,14 +21,19 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // 2. Memaksa HTTPS di lingkungan production (Railway)
+        // Memaksa HTTPS di lingkungan production (Railway)
         if (config('app.env') === 'production' || env('APP_ENV') === 'production') {
             URL::forceScheme('https');
         }
 
-        // 3. Tambahkan Gate Admin di bawah ini (Abaikan huruf besar/kecil dari database)
+        // Gate untuk Admin (Abaikan huruf besar/kecil)
         Gate::define('admin', function ($user) {
             return strtolower($user->role) === 'admin';
+        });
+
+        // TAMBAHKAN KODE INI: Gate untuk Mahasiswa (Abaikan huruf besar/kecil)
+        Gate::define('mahasiswa', function ($user) {
+            return strtolower($user->role) === 'mahasiswa';
         });
     }
 }

@@ -87,8 +87,8 @@ Route::middleware(['auth'])->group(function () {
     | MAHASISWA (Jika nanti kamu buat Gate 'mahasiswa')
     |--------------------------------------------------------------------------
     |*/
-    // Untuk sementara memakai auth biasa agar rute mahasiswa tidak ikutan eror 
-    Route::middleware(['auth'])->group(function () {
+
+   Route::middleware(['can:mahasiswa'])->group(function () {
 
         Route::resource('krs', KrsController::class);
 
