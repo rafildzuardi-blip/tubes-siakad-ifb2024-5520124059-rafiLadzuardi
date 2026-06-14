@@ -17,6 +17,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            
+            // TAMBAHAN: Kolom untuk menyimpan NPM dan Role Mahasiswa
+            $table->string('npm')->unique()->nullable();  // Unik agar tidak ada NPM kembar, nullable untuk admin
+            $table->string('role')->default('mahasiswa'); // Otomatis diset sebagai 'mahasiswa' saat mendaftar
+            
             $table->rememberToken();
             $table->timestamps();
         });
