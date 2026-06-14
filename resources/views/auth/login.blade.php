@@ -53,6 +53,20 @@
             margin-bottom:30px;
         }
 
+        /* Style Baru untuk Kotak Error */
+        .alert-error {
+            background-color: #fecaca;
+            color: #dc2626;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border: 1px solid #fca5a5;
+        }
+        .alert-error ul {
+            padding-left: 20px;
+        }
+
         .input-group{
             margin-bottom:18px;
         }
@@ -125,6 +139,16 @@
             Sistem Informasi Akademik Mahasiswa
         </p>
 
+        @if ($errors->any())
+            <div class="alert-error">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
@@ -133,6 +157,7 @@
                 <input
                     type="email"
                     name="email"
+                    value="{{ old('email') }}" 
                     placeholder="Masukkan email"
                     required
                     autofocus
@@ -169,4 +194,3 @@
 
 </body>
 </html>
-
