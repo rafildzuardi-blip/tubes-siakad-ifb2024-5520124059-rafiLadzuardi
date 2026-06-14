@@ -9,6 +9,10 @@ use App\Http\Controllers\KrsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+Route::get('/', function () {
+    return view('welcome'); // Mengembalikan tampilan halaman welcome bawaan Laravel
+});
+
 
 Route::get('/logout-user', function () {
     Auth::logout();
