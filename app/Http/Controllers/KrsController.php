@@ -10,12 +10,20 @@ use App\Models\Matakuliah;
 
 class KrsController extends Controller
 {
+
+    public function adminIndex()
+{
+    $krs = Krs::all();
+
+    return view('krs.admin', compact('krs'));
+}
+
     public function index()
-    {
+{
         $krs = Krs::where('npm', auth()->user()->npm)->get();
 
         return view('krs.index', compact('krs'));
-    }
+}
 
     public function create()
 {

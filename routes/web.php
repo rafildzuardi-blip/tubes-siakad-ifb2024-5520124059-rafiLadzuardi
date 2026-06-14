@@ -10,6 +10,7 @@ use App\Http\Controllers\KrsController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+
 Route::get('/logout-user', function () {
     Auth::logout();
     return redirect('/login');
@@ -95,6 +96,9 @@ Route::middleware(['auth'])->group(function () {
             ->name('jadwal.mahasiswa');
 
     });
+
+    Route::get('/admin-krs', [KrsController::class, 'adminIndex'])
+    ->name('krs.admin');
 
 });
 

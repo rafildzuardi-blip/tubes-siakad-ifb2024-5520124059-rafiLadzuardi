@@ -344,6 +344,13 @@ return [
         'can'  => 'admin',
     ],
 
+    [
+        'text' => 'KRS',
+        'url'  => 'admin-krs',
+        'icon' => 'fas fa-fw fa-file-signature',
+        'can'  => 'admin',
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | MENU MAHASISWA
