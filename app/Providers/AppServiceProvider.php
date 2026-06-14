@@ -3,19 +3,25 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\URL; // Tambahkan baris ini jika belum ada
+use Illuminate\Support\Facades\URL; // 1. Pastikan baris ini ada di paling atas
 
 class AppServiceProvider extends ServiceProvider
 {
+    /**
+     * Register any application services.
+     */
     public function register(): void
     {
         //
     }
 
+    /**
+     * Bootstrap any application services.
+     */
     public function boot(): void
     {
-        // Paksa semua URL dan Form menggunakan HTTPS jika di-deploy di Railway
-        if (config('app.env') === 'production' || env('REDIRECT_HTTPS', true)) {
+        // 2. Tambahkan kondisi ini untuk memaksa HTTPS di lingkungan production (Railway)
+        if (config('app.env') === 'production' || env('APP_ENV') === 'production') {
             URL::forceScheme('https');
         }
     }
