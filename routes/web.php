@@ -26,7 +26,7 @@ Route::get('/krs/print', [KrsController::class, 'print'])
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
 });
 
 /*
