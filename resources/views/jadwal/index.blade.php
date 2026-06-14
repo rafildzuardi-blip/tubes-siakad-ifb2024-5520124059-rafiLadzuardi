@@ -40,7 +40,9 @@
         </h3>
     </div>
 
-    <div class="card-body p-0 p-sm-3"> <div class="table-responsive w-full" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
+    <div class="card-body p-0 p-sm-3">
+
+        <div class="table-responsive w-full" style="overflow-x: auto; -webkit-overflow-scrolling: touch;">
 
             <table class="table table-bordered table-hover mb-0" style="min-width: 800px; width: 100%;">
 
@@ -117,4 +119,22 @@
                 @empty
 
                     <tr>
-                        <td colspan="7" class="text-center py-5 text-muted
+                        <td colspan="7" class="text-center py-5 text-muted">
+                            <i class="fas fa-calendar-times fa-2x mb-3 text-gray"></i>
+                            <br>
+                            <strong>Belum ada data jadwal</strong>
+                        </td>
+                    </tr>
+
+                @endforelse
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+@stop
