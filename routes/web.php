@@ -1,4 +1,3 @@
-
 <?php
 
 use App\Http\Controllers\ProfileController;
@@ -19,6 +18,7 @@ Route::get('/logout-user', function () {
 
 Route::get('/krs/print', [KrsController::class, 'print'])
     ->name('krs.print');
+
 /*
 |--------------------------------------------------------------------------
 | Welcome
@@ -36,8 +36,8 @@ Route::get('/', function () {
 */
 
 Route::get('/dashboard', function () {
-
-    if (auth()->user()->role == 'admin') {
+    // Menggunakan strtolower agar aman dari sensitivitas huruf besar/kecil database
+    if (strtolower(auth()->user()->role) == 'admin') {
         return view('admin.dashboard');
     }
 
@@ -65,11 +65,10 @@ Route::middleware(['auth'])->group(function () {
 
     /*
     |--------------------------------------------------------------------------
-    | ADMIN
+    | ADMIN (Diubah dari role:admin menjadi can:admin)
     |--------------------------------------------------------------------------
-    */
-
-    Route::middleware(['role:admin'])->group(function () {
+    |*/
+    Route::middleware(['can:admin'])->group(function () {
 
         Route::resource('dosen', DosenController::class);
 
@@ -79,15 +78,17 @@ Route::middleware(['auth'])->group(function () {
 
         Route::resource('jadwal', JadwalController::class);
 
+        Route::get('/admin-krs', [KrsController::class, 'adminIndex'])
+            ->name('krs.admin');
     });
 
     /*
     |--------------------------------------------------------------------------
-    | MAHASISWA
+    | MAHASISWA (Jika nanti kamu buat Gate 'mahasiswa')
     |--------------------------------------------------------------------------
-    */
-
-    Route::middleware(['role:mahasiswa'])->group(function () {
+    |*/
+    // Untuk sementara memakai auth biasa agar rute mahasiswa tidak ikutan eror 
+    Route::middleware(['auth'])->group(function () {
 
         Route::resource('krs', KrsController::class);
 
@@ -97,10 +98,6 @@ Route::middleware(['auth'])->group(function () {
 
     });
 
-    Route::get('/admin-krs', [KrsController::class, 'adminIndex'])
-    ->name('krs.admin');
-
 });
 
 require __DIR__.'/auth.php';
-
